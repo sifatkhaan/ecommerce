@@ -6,10 +6,10 @@ import { IoMdStar, IoMdStarOutline } from "react-icons/io";
 export default function ShopSidebar({onBrandChange, onColorChange, onSizeChange, onPriceChange, range}:any) {
     const { Panel } = Collapse;
     return (
-        <div>
+        <div className='p-0' style={{padding:0}}>
             <div className='bg-white lg:p-3 lg:py-6'>
                 <Collapse defaultActiveKey={['1']}
-                    expandIconPosition="right"
+                    expandIconPosition="start"
                     ghost
                     className='font-bold'
                 >

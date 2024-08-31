@@ -5,7 +5,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { TfiMenuAlt } from "react-icons/tfi";
 import React, { useState } from 'react'
-import { Button, Dropdown, MenuProps, message, Space, DrawerProps, Drawer, Collapse,} from "antd";
+import { Button, Dropdown, MenuProps, message, Space, DrawerProps, Drawer,} from "antd";
 import ShopSidebar from '@/components/ShopSidebar';
 import ProductCard from '@/components/Card';
 
@@ -18,11 +18,13 @@ export default function ShopPage() {
   const [range, setRange] = useState<any>([10, 200]);
   const [grid, setGrid] = useState(5)
   const [gridView, setGridView] = useState(false)
-  const handleChangeGrid = ()=>{
+  const handleChangeMenu = ()=>{
     setGridView(true)
   }
+  const handleChangeGrid = ()=>{
+    setGridView(false)
+  }
 
-  console.log(gridView, "grid")
   const showDrawer = () => {
     setOpen(true);
   };
@@ -36,16 +38,19 @@ export default function ShopPage() {
   };
   const items: MenuProps['items'] = [
     {
-      label: '1st menu item',
       key: '1',
+      label: 'Panel 1',
+      children: [],
     },
     {
       label: '2nd menu item',
       key: '2',
+       children: [],
     },
     {
       label: '3rd menu item',
       key: '3',
+       children: [],
     },
   ];
   //functions for filter
@@ -179,28 +184,31 @@ export default function ShopPage() {
               <div className='border hidden lg:block p-2 text-sm font-semibold text-gray-600'>
                 <div className='flex'>
                   <div className='flex justify-between items-center mr-2 w-1/4'>
-                    <div className='m-2' ><BsFillGrid3X3GapFill className='cursor-pointer' /></div>
-                    <div className='m-2' ><TfiMenuAlt className='cursor-pointer' onClick={()=> handleChangeGrid()} /></div>
+                    <div className='m-2' ><BsFillGrid3X3GapFill className='cursor-pointer' onClick={()=> handleChangeGrid()}/></div>
+                    <div className='m-2' ><TfiMenuAlt className='cursor-pointer' onClick={()=> handleChangeMenu()}/></div>
                   </div>
-                  <div className='flex justify-end items-center w-3/4'>
-                    <div className='mx-2 hover:cursor-pointer' onClick={()=>handleGridChange(2)}>
-                      <img src="/assets/images/category/icon/2.png" alt="" className='w-4 h-4' />
-                    </div>
-                    <div className='mx-2  hover:cursor-pointer' onClick={()=>handleGridChange(3)}>
-                      <img src="/assets/images/category/icon/3.png" alt="" className='w-6 h-4' />
-                    </div>
-                    <div className='mx-2 hover:cursor-pointer' onClick={()=>handleGridChange(4)}>
-                      <img src="/assets/images/category/icon/4.png" alt="" className='w-9 h-4' />
-                    </div>
-                    <div className='mx-2 hover:cursor-pointer' onClick={()=>handleGridChange(6)}>
-                      <img src="/assets/images/category/icon/6.png" alt="" className='w-12 h-4' />
-                    </div>
-                  </div>
+                  {!gridView && (
+                                      <div className='flex justify-end items-center w-3/4'>
+                                      <div className='mx-2 hover:cursor-pointer' onClick={()=>handleGridChange(2)}>
+                                        <img src="/assets/images/category/icon/2.png" alt="" className='w-4 h-4' />
+                                      </div>
+                                      <div className='mx-2  hover:cursor-pointer' onClick={()=>handleGridChange(3)}>
+                                        <img src="/assets/images/category/icon/3.png" alt="" className='w-6 h-4' />
+                                      </div>
+                                      <div className='mx-2 hover:cursor-pointer' onClick={()=>handleGridChange(4)}>
+                                        <img src="/assets/images/category/icon/4.png" alt="" className='w-9 h-4' />
+                                      </div>
+                                      <div className='mx-2 hover:cursor-pointer' onClick={()=>handleGridChange(6)}>
+                                        <img src="/assets/images/category/icon/6.png" alt="" className='w-12 h-4' />
+                                      </div>
+                                    </div>
+                  ) }
+
                 </div>
               </div>
               <div className='flex justify-center items-center border p-2'>
                 <Dropdown menu={{ items, onClick }}>
-                  <a onClick={(e) => e.preventDefault()} className='w-full flex justify-between items-center'>
+                  <a href='#' onClick={(e) => e.preventDefault()} className='w-full flex justify-between items-center'>
                     <Space>
                       24 Products Per Page
                     </Space>
@@ -210,7 +218,7 @@ export default function ShopPage() {
               </div>
               <div className='flex justify-center items-center border p-2'>
                 <Dropdown menu={{ items, onClick }} className='w-full'>
-                  <a onClick={(e) => e.preventDefault()} className='w-full flex justify-between items-center'>
+                  <a href='#' onClick={(e) => e.preventDefault()} className='w-full flex justify-between items-center'>
                     <Space>
                       Sorting items
                     </Space>
@@ -234,61 +242,11 @@ export default function ShopPage() {
           onClose={onClose}
           open={open}
           key={placement}
-          bodyStyle={{ padding: 0 }}
+          styles={{ body: { padding: 0 } }}
         >
           <div className='my-2'>
             <Button onClick={onClose} className='border-none font-bold text-lg'><IoIosArrowBack /> Back</Button>
           </div>
-          {/* <div className='m-4'>
-          <Collapse defaultActiveKey={['1']}
-          expandIconPosition="right"
-          ghost 
-          className='font-bold'
-          >
-            <Panel header="BRAND" key="1" className='border-y'>
-              <p><Checkbox className='font-semibold'>ZARA</Checkbox></p>
-              <p><Checkbox className='font-semibold'>NIKE</Checkbox></p>
-              <p><Checkbox className='font-semibold'>ADIDAS</Checkbox></p>
-              <p><Checkbox className='font-semibold'>LOTTO</Checkbox></p>
-              <p><Checkbox className='font-semibold'>PUMA</Checkbox></p>
-            </Panel>
-            <Panel header="COLORS" key="2" className='uppercase border-y'>
-              <p><Checkbox  className='custom-checkbox font-semibold'>White</Checkbox></p>
-              <p><Checkbox className='custom-checkbox1 font-semibold'>Brown</Checkbox></p>
-              <p><Checkbox className='custom-checkbox2 font-semibold'>Red</Checkbox></p>
-              <p><Checkbox className='custom-checkbox3 font-semibold'>Teal</Checkbox></p>
-              <p><Checkbox className='custom-checkbox4 font-semibold'>Pink</Checkbox></p>
-            </Panel>
-            <Panel header="SIZE" key="3" className='border-y'>
-            <p><Checkbox className='font-semibold'>S</Checkbox></p>
-              <p><Checkbox className='font-semibold'>M</Checkbox></p>
-              <p><Checkbox className='font-semibold'>L</Checkbox></p>
-              <p><Checkbox className='font-semibold'>XL</Checkbox></p>
-              <p><Checkbox className='font-semibold'>XXL</Checkbox></p>
-            </Panel>
-            <Panel header="PRICE" key="4" className='border-y'>
-            <Slider
-                range
-                min={500}
-                max={3000}
-                defaultValue={[1000, 2000]}
-                value={range}
-                onChange={setRange}
-                tooltip={
-                  {
-                    formatter: value => `৳${value}`,
-                    
-                  }
-                  
-                }
-                
-              />
-                     <div className='p-2 text-base lg:text-lg'>
-                      Selected Range: <span className='font-normal'>৳ {range[0]} - ৳ {range[1]}</span>
-                    </div>
-            </Panel>
-          </Collapse>
-          </div> */}
           <ShopSidebar
              onBrandChange = {handleBrandChange}
              onColorChange = {handleColorChange}
