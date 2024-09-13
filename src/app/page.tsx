@@ -7,9 +7,35 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProductCard from "@/components/Card";
 import CardSlider from "@/components/slider/CardSlider";
+
 export default function Home() {
   const [grid, setGrid] = useState(5);
   const [category, setCategory] = useState('');
+
+  let book = {
+    title: "Tiny Habits",
+    author: "BJ Fogg",
+    isCheckedOut: false
+  }
+  
+  console.log(book.isCheckedOut, 'book up') 
+  let backup = book
+  
+  book.isCheckedOut = true
+  
+  console.log(backup === book, 'book')  // true!
+  console.log(backup.isCheckedOut, 'back up') 
+  console.log(book.isCheckedOut, 'book up') 
+  function minimum(array) {
+    const newArray = [...array].sort()
+   
+    return newArray[0]
+  }
+  
+  const items = [7, 1, 9, 4];
+  const min = minimum(items);
+  console.log(min)
+  console.log(items)
 
   const settings = {
     dots: false,
@@ -84,8 +110,8 @@ export default function Home() {
   const slideToShow = [
     {
       id: 1,
-      image: 'https://themes.pixelstrap.com/bigdeal/assets/images/farming/product/8.jpg',
-      image2: 'https://themes.pixelstrap.com/bigdeal/assets/images/farming/product/3.jpg',
+      image: '/assets/images/farm/collection/1.jpg',
+      image2: '/assets/images/farm/collection/1.jpg',
       name: 'Tomato Hybrid Vegetable Seeds',
       price: 70,
       discounted: 60,
@@ -96,8 +122,8 @@ export default function Home() {
     },
     {
       id: 2,
-      image: 'https://themes.pixelstrap.com/bigdeal/assets/images/farming/product/8.jpg',
-      image2: 'https://themes.pixelstrap.com/bigdeal/assets/images/farming/product/3.jpg',
+      image: '/assets/images/product/headPhone.jpeg',
+      image2: '/assets/images/product/multiImage.jpeg',
       name: 'Tomato Hybrid Vegetable Seeds',
       price: 72,
       discounted: 65,
@@ -228,7 +254,7 @@ export default function Home() {
       </section>
       <section className="m-2">
 
-        <div className="sm:mx-auto md:mx-auto lg:mx-10">
+        <div className=" slider-container sm:mx-auto md:mx-auto lg:mx-10">
           <Slider {...settingss}>
             {serviceImage &&
               serviceImage.map((image, i) => (

@@ -30,7 +30,7 @@ export default function ShopNewProduct() {
                 </div>
                 <Slider ref={slideRef} {...setting}>
                 <div>
-                    <div className='flex mt-4 '>
+                    <div className='flex mt-4'>
                         <div>
                             <img src="/assets/images/category/media/3.jpg" alt="" className='border' />
                         </div>

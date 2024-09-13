@@ -2,14 +2,18 @@
 import BreadCrump from '@/components/BreadCrump'
 import { FaFilter, FaChevronDown } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
+import { toast } from 'react-toastify';
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { TfiMenuAlt } from "react-icons/tfi";
 import React, { useState } from 'react'
 import { Button, Dropdown, MenuProps, message, Space, DrawerProps, Drawer,} from "antd";
 import ShopSidebar from '@/components/ShopSidebar';
 import ProductCard from '@/components/Card';
+import { useDispatch } from 'react-redux';
+import { addToWishList } from '@/redux/slices/wishSlice';
 
 export default function ShopPage() {
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState<DrawerProps['placement']>('left');
   const [selectedBrand, setSelectedBrand] = useState([]);
@@ -74,8 +78,8 @@ export default function ShopPage() {
   const slideToShow= [
     {
       id:1,
-      image:'https://themes.pixelstrap.com/bigdeal/assets/images/farming/product/8.jpg',
-      image2:'https://themes.pixelstrap.com/bigdeal/assets/images/farming/product/3.jpg',
+      image: '/assets/images/farm/collection/1.jpg',
+      image2: '/assets/images/farm/collection/1.jpg',
       name:'Tomato Hybrid Vegetable Seeds',
       price:70,
       discounted:60,
@@ -85,8 +89,8 @@ export default function ShopPage() {
     },
     {
       id:2,
-      image:'https://themes.pixelstrap.com/bigdeal/assets/images/farming/product/8.jpg',
-      image2:'https://themes.pixelstrap.com/bigdeal/assets/images/farming/product/3.jpg',
+      image: '/assets/images/product/headPhone.jpeg',
+      image2: '/assets/images/product/multiImage.jpeg',
       name:'Tomato Hybrid Vegetable Seeds',
       price:72,
       discounted:65,
@@ -148,14 +152,14 @@ export default function ShopPage() {
     return brandMatch && colorMatch && sizeMatch && priceMatch;
   })
 
-  console.log(filteredProducts, "filterded")
+
 
   return (
     <div className='h-auto bg-green-50'>
       <BreadCrump pageName='category' lastName='Category'/>
-      <div className='m-4 lg:mt-6 lg:mx-20'>
+      <div className='m-2 lg:m-4 lg:mt-6 lg:mx-20'>
         <div className='flex'>
-          <div className='w-1/4 hidden lg:block mx-4'>
+          <div className='w-1/4 hidden lg:block mx-4 '>
            <ShopSidebar 
            onBrandChange = {handleBrandChange}
            onColorChange = {handleColorChange}

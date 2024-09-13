@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import "react-toastify/dist/ReactToastify.css";
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -213,7 +213,9 @@ body {
   transition: width 1s ease-out, height 1s ease-out, opacity 1s ease-out;
 }
 
-
+.slider-container .slick-slide > div {
+  margin: 0 5px;
+}
 
 
 }
